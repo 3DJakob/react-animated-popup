@@ -28,7 +28,7 @@ const [visible, setVisible] = useState(false)
 
 return (
   <Popup visible={visible} onClose={() => setVisible(false)}>
-    <p>I'm a popup!</p>
+    <p>I am a popup!</p>
   </Popup>
 )
 ```
