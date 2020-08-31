@@ -15,9 +15,9 @@ npm install --save react-animated-popup
 
 ## Usage
 
-Import Popup and use the component like the snippet. Note that you will need to update your visibilty state on the `onClose` event.
+Import Popup and use the component like the snippet. Note that you will need to update your visibility state on the `onClose` event.
 
-The Popup element can be placed anywhere in your DOM! Just make sure it is not inside a `positon: absolute/relative` element.
+The Popup element can be placed anywhere in your DOM! Just make sure it is not inside a `position: absolute/relative` element.
 
 The children can be anything you want! Create a popup for your purpose.
 
