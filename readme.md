@@ -51,7 +51,7 @@ Children to make up the popup.
 - required
 - type: `boolean`
 
-Tha prompt state, make true to make the prompt appear.
+The prompt state, make true to make the prompt appear.
 
 ### `onClose`
 
