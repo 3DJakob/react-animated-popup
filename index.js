@@ -47,7 +47,7 @@ function Popup ({ children, visible, onClose, animationDuration = 100, style }) 
 
   return (
     React.createElement(Container, { clickable: animationState, onClick: bgClick }, [
-      React.createElement(PromptElement, { style: { style }, onClick: (e) => e.stopPropagation(), visible: animationState, animationDuration: animationDuration }, children)
+      React.createElement(PromptElement, { style: { ...style }, onClick: (e) => e.stopPropagation(), visible: animationState, animationDuration: animationDuration }, children)
     ])
   )
 }
