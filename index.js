@@ -14,11 +14,6 @@ const Container = styled.div`
   z-index: 100;
 `
 
-interface PromptElementProps {
-  animationDuration: number
-  visible: boolean
-}
-
 const PromptElement = styled.div`
   padding: 40px;
   background: #fff;
@@ -28,12 +23,12 @@ const PromptElement = styled.div`
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   z-index: 100;
   cursor: default;
-  transition: ${(props: PromptElementProps) => props.animationDuration}ms;
+  transition: ${(props) => props.animationDuration}ms;
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transform: ${(props) => (props.visible ? 'scale(1)' : 'scale(0.9)')};
 `
 
-function Popup({ children, visible, onClose, animationDuration = 100, style }) {
+function Popup ({ children, visible, onClose, animationDuration = 100, style }) {
   const [animationState, setAnimationState] = useState(visible)
 
   const [displayNothing, setDisplayNothing] = useState(!visible)
@@ -71,11 +66,11 @@ function Popup({ children, visible, onClose, animationDuration = 100, style }) {
           animationDuration: animationDuration,
           onClick: (e) => e.stopPropagation(),
           style: { ...style },
-          visible: animationState,
+          visible: animationState
         },
-        children,
-      ),
-    ],
+        children
+      )
+    ]
   )
 }
 
