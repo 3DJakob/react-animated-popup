@@ -1,76 +1,74 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 
-import styled from 'styled-components'
-
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-`
-
-const PromptElement = styled.div`
-  padding: 40px;
-  background: #fff;
-  border-radius: 10px;
-  margin: 20px;
-  max-width: 400px;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  z-index: 100;
-  cursor: default;
-  transition: ${(props) => props.animationDuration}ms;
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: ${(props) => (props.visible ? 'scale(1)' : 'scale(0.9)')};
-`
+const ContainerStyle = {
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 100
+}
 
 function Popup ({ children, visible, onClose, animationDuration = 100, style }) {
+  const [firstTimeSetup, setFirstTimeSetup] = useState(true)
   const [animationState, setAnimationState] = useState(visible)
-
   const [displayNothing, setDisplayNothing] = useState(!visible)
 
-  useEffect(() => {
-    if (visible) {
-      // Trigger chained effect
-      setDisplayNothing(false)
-    }
+  useLayoutEffect(() => {
+    if (firstTimeSetup) return
+    if (displayNothing) return
+    // Fix to make sure the element has been rendered before we start the animation otherwise react might execute before doing a re-render
+    window.setTimeout(() => {
+      setAnimationState(true)
+    }, 1)
+  }, [displayNothing])
 
-    if (!visible) {
-      setAnimationState(visible)
-      window.setTimeout(() => {
-        setDisplayNothing(true)
-      }, animationDuration)
+  useEffect(() => {
+    setFirstTimeSetup(false)
+    if (firstTimeSetup) return
+
+    if (visible) {
+      setDisplayNothing(false)
+    } else {
+      if (displayNothing === false) {
+        setAnimationState(false)
+        window.setTimeout(() => {
+          setDisplayNothing(true)
+        }, animationDuration)
+      }
     }
   }, [visible, animationDuration])
 
-  // Chained effects to be able to animate in from not existing
-  useEffect(() => {
-    if (!displayNothing) {
-      setAnimationState(visible)
-    }
-  }, [displayNothing, visible])
-
   if (displayNothing) return null
 
+  const PromptStyle = {
+    padding: 40,
+    background: '#fff',
+    borderRadius: 10,
+    margin: 20,
+    maxWidth: 400,
+    boxShadow: '0px 0px 20px 0px rgba(0, 0, 0, 0.2)',
+    zIndex: 100,
+    cursor: 'default',
+    transition: animationDuration + 'ms',
+    opacity: animationState ? 1 : 0,
+    transform: animationState ? 'scale(1)' : 'scale(0.9)'
+  }
+
   return React.createElement(
-    Container,
-    { clickable: animationState, onClick: onClose },
-    [
-      React.createElement(
-        PromptElement,
-        {
-          animationDuration: animationDuration,
-          onClick: (e) => e.stopPropagation(),
-          style: { ...style },
-          visible: animationState
-        },
-        children
-      )
-    ]
+    'div',
+    { onClick: onClose, style: ContainerStyle },
+    React.createElement(
+      'div',
+      {
+        onClick: (e) => e.stopPropagation(),
+        style: { ...style, ...PromptStyle }
+      },
+      children
+    )
   )
 }
 

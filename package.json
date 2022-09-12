@@ -1,6 +1,6 @@
 {
   "name": "react-animated-popup",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A npm react module for making react elements animate in and out like a popup with outside touches dismissing it.",
   "repository": "3DJakob/react-animated-popup",
   "license": "MIT",
@@ -10,9 +10,6 @@
   ],
   "scripts": {
     "test": "standard && ts-readme-generator --check"
-  },
-  "dependencies": {
-    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@types/react": "^16.9.49",
