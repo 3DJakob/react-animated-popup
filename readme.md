@@ -1,6 +1,6 @@
 # React Animated Popup
 
-A module to make elements become popups and animate in and out.
+React animated popup is a lightweight zero-dependency module to make elements become popups and animate in and out.
 
 ## Demo
 ![](demo.gif)
