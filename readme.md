@@ -74,3 +74,8 @@ The duration of the animations in ms.
 - type: `CSSProperties`
 
 Override styling to the popup div. Per default, it has a white background, rounded corners, and shadow. Everything can be overridden and it can be designed however you like!
+
+
+### `className`
+
+Classname to add to the popup div.

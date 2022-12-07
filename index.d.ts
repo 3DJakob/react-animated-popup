@@ -28,6 +28,11 @@ declare interface Props {
    * Override styling to the popup div. Per default it has 40px padding & 10px border-radius.
   */
   style?: CSSProperties
+
+  /**
+   * Classname to add to the popup div.
+  */
+  className?: string
 }
 
 declare const Popup: React.FC<Props>

@@ -12,7 +12,7 @@ const ContainerStyle = {
   zIndex: 100
 }
 
-function Popup ({ children, visible, onClose, animationDuration = 100, style }) {
+function Popup ({ children, visible, onClose, animationDuration = 100, style, className }) {
   const [firstTimeSetup, setFirstTimeSetup] = useState(true)
   const [animationState, setAnimationState] = useState(visible)
   const [displayNothing, setDisplayNothing] = useState(!visible)
@@ -65,7 +65,8 @@ function Popup ({ children, visible, onClose, animationDuration = 100, style }) 
       'div',
       {
         onClick: (e) => e.stopPropagation(),
-        style: { ...PromptStyle, ...style }
+        style: { ...PromptStyle, ...style },
+        className: className
       },
       children
     )
