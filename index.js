@@ -46,7 +46,7 @@ function Popup ({ children, visible, onClose, animationDuration = 100, style }) 
 
   const PromptStyle = {
     padding: 40,
-    background: '#fff',
+    backgroundColor: '#fff',
     borderRadius: 10,
     margin: 20,
     maxWidth: 400,
@@ -65,7 +65,7 @@ function Popup ({ children, visible, onClose, animationDuration = 100, style }) 
       'div',
       {
         onClick: (e) => e.stopPropagation(),
-        style: { ...style, ...PromptStyle }
+        style: { ...PromptStyle, ...style }
       },
       children
     )
